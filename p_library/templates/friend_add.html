@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Взять книгу {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			<h3 class="display-4 text-center">Ваше имя и какую книгу(и) хотите взять:</h3>
+			{% crispy form %}
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Книги {% endblock %}
+
+{% block content %}
+
+    <h2 class="display-4 text-center">Список книг</h2>
+      <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Название книги</th>
+                <th>Обложка </th>
+                <th>Автор(ы) </th>
+                <th>Страна </th>
+                <th>Описание </th>
+                <th>Год первого издания </th>
+                <th>Издательство </th>
+                <th>ISBN </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in book_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td style="font-size:18px"><strong>{{ book.title }}</strong></td>
+                <td> <img style="width:85px" src="{{ MEDIA_URL }}{{ book.image}}"></td> 
+                <td>{% for author in book.authors.all %} {{ author.full_name}}{% if not forloop.last %}, {% endif %} {% endfor %} </td>
+                <td>{{ book.country}}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.year_release }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.ISBN }} </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}

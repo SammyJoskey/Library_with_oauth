@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Друзья {% endblock %}
+
+{% block content %}
+<h2 class="display-4 text-center">Список друзей и одолженных книг</h2>
+
+    <table class="table table-striped text-center col-md-6 mx-auto">
+        <thead>
+            <tr>
+                <th> Имя друга </th>
+                <th> Книга </th>
+                <th> Когда одолжил </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for friend in friend_list %}
+            <tr>
+                <td>{{ friend.name }}</td>
+                <td>{% for book in friend.books.all %} {{ book.title }}{% if not forloop.last %}, {% endif %}{% endfor %} </td>
+                <td>{{ friend.date }} </td>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

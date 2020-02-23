@@ -1,0 +1,94 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" >
+    <title>{% block title %} Моя библиотека {% endblock %}</title>
+</head>
+<body> 
+    {% if user.is_authenticated %}
+    <div class="text-right" style="margin-right: 10px;">
+      Вы вошли как <strong>{{ user.username }}</strong>
+      <a href="{% url 'account_logout' %}">Выйти</a> </div>
+      {% block navbar %}
+      {% if 'friend/add' in request.path %}
+      <nav class="navbar-nav">
+        <button type="button" class="btn btn-secondary">
+          <a class="nav-link" style="color:white" href="{% url 'p.library:home' %}">На главную</a>
+        </button>
+      {% elif 'book/add' in request.path %}
+      <nav class="navbar-nav">
+        <button type="button" class="btn btn-secondary">
+          <a class="nav-link" style="color:white" href="{% url 'p.library:home' %}">На главную</a>
+        </button>
+        <button type="button" class="btn btn-secondary"> 
+          <a class="nav-link" style="color:white" href="{% url 'p.library:author_add' %}">Добавить автора </a>
+        </button>
+      </nav>
+      {% elif 'author/add' in request.path %}
+      <nav class="navbar-nav">
+        <button type="button" class="btn btn-secondary">
+          <a class="nav-link" style="color:white" href="{% url 'p.library:home' %}">На главную</a>
+        </button>
+        <button type="button" class="btn btn-secondary"> 
+          <a class="nav-link" style="color:white" href="{% url 'p.library:book_add' %}">Добавить книгу</a>
+        </button>
+      </nav>
+      {% else %}
+      <nav class="navbar-nav">
+        {% if 'book' in request.path %}
+        <button type="button" class="btn btn-dark">
+          <a class="nav-link" style="color:white" href="{% url 'p.library:book_add' %}">Добавить книгу</a>
+        {% else %}
+        <button type="button" class="btn btn-secondary">
+          <a class="nav-link" style="color:white" href="{% url 'p.library:book_list' %}">Список книг</a>
+        {% endif %}
+        </button>
+        {% if 'author' in request.path %} 
+        <button type="button" class="btn btn-dark"> 
+          <a class="nav-link" style="color:white" href="{% url 'p.library:author_add' %}">Добавить автора </a>
+        {% else %}
+        <button type="button" class="btn btn-secondary">  
+          <a class="nav-link" style="color:white" href="{% url 'p.library:author_list' %}">Cписок авторов </a>
+        {% endif %}
+        </button>
+        
+        <button type="button" class="btn btn-secondary {% if 'p.library:publisher' in request.path %} disabled {% endif %}">
+          <a class="nav-link" style="color:white" href="{% url 'p.library:publisher_list' %}">Список издательств </a>
+        </button>
+
+        {% if 'friend' in request.path %}
+        <button type="button" class="btn btn-dark">
+          <a class="nav-link" style="color:white" href="{% url 'p.library:friend_add' %}">Записаться в друзья и одолжить книгу</a></button>
+        {% else %}      
+        <button type="button" class="btn btn-secondary">
+         <a class="nav-link" style="color:white" href="{% url 'p.library:friend_list' %}">Друзяшки</a></button>
+        {% endif %}
+      </nav>
+    {% endif %} 
+    {% endblock %}   
+
+
+    {% else %}
+    {% block index %}
+      {% endblock %}
+      <div class="text-center" style="font-size: 20px;"> Чтобы перейти к библиоткеке, вам необходимо <a href="{% url 'account_login' %}">войти</a> или <a href="{% url 'account_signup' %}">зарегистрироваться</a> </div>
+    {% endif %}
+ 
+  
+      {% block main %}
+      {% endblock %}
+  
+      
+  
+      
+
+    
+    {% block content %}{% endblock %}
+</body>
+</html

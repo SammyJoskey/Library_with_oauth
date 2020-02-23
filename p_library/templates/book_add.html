@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Добавить книгу {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 mx-auto">
+				<h2 class="display-4 text-center">Добавьте книгу:</h2>
+				{% crispy form %}
+			</div> 
+		</div>
+	</div> 
+{% endblock %}

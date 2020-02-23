@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Авторы {% endblock %}
+
+{% block content %}
+    <h2 class="display-4 text-center">Список авторов книг</h2>
+            <table class="table table-striped col-lg-6 mx-auto">
+                <thead>
+                    <tr>
+                        <th> Имя автора </th>
+                        <th> Год рождения </th>
+                        <th> Страна </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for author in author_list %}
+                        <tr>
+                            <td>{{ author.full_name }}</td>
+                            <td>{{ author.birth_year }}</td>
+                            <td>{{ author.country }}</td>
+                        </tr>        
+                    {% endfor %}
+                </tbody>
+            </table>
+
+{% endblock %}

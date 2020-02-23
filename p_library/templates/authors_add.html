@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Добавить автора {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 mx-auto">
+				<h3 class="display-4 text-center my-4">Добавьте автора:</h3>
+				{% crispy form %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
